@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 //files
 import { DB_NAME } from "../constant.js"
 
-//constant
+//mongoDb url
 const MONGO_URI = process.env.MONGO_URI
 
 //db connection
