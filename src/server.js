@@ -9,6 +9,7 @@ import {app} from "../src/app.js"
 dotenv.config({
     path: './env'       //dotenv configuration
 })
+
 const PORT = process.env.PORT || 8000
 
 //DB connection
@@ -19,6 +20,6 @@ connectDB()
     })
 })
 .catch((error) => {
-    console.log("mongoDB connection failer !!! ", err);
+    console.log("mongoDB connection failed !!! ", error);
 })
 
