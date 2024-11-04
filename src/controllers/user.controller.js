@@ -7,6 +7,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async (req,res) => {
     const {username,email,fullname,password} = req.body
+    console.log(username,email,fullname,password);
     
     if(
      [username,email,fullname,password].some((field) => field?.trim()==="")    
@@ -36,7 +37,7 @@ const registerUser = asyncHandler(async (req,res) => {
         throw new ApiError(500,'Internal error, please try again!')
     }
 
-    await User.create({
+    const userObject = await User.create({
         username: username.toLowerCase(),
         email,
         fullname,
@@ -48,11 +49,11 @@ const registerUser = asyncHandler(async (req,res) => {
     const createdUser = await User.findById(userObject._id).select('-password -refreshToken -avatar -coverImage -email');
 
     if(!createdUser){
-        throw new ApiError(500,"something went wronf")
+        throw new ApiError(500,"something went wrong")
     }
 
     return res.status(201).json(
-        new ApiResponse(200,createdUser,"Registered Successfully")
+        new ApiResponse(200,createdUser,"Registered Successfully") 
     )
 })
 
